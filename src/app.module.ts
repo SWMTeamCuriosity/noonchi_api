@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { TokensModule } from './tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
+import { ProducerModule } from './producer/producer.module';
+import { DialogsService } from './dialogs/dialogs.service';
+import { DialogsController } from './dialogs/dialogs.controller';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 @Module({
   imports: [
@@ -16,8 +20,10 @@ import { LoggerModule } from 'nestjs-pino';
         },
       },
     }),
+    ProducerModule,
+    DialogsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, DialogsController],
+  providers: [AppService, DialogsService],
 })
 export class AppModule {}

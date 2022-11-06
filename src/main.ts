@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from 'nestjs-pino';
+import { configAws } from './config/config.aws';
+import { getMainCommentOfNode } from '@nestjs/swagger/dist/plugin/utils/ast-utils';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -23,6 +25,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
+  console.log(configAws.AWS_CLIENT_ID);
+  console.log(`API Listening on ${port}`);
   await app.listen(port);
 }
+
 bootstrap();

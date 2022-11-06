@@ -1,18 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { ConfigService } from '@nestjs/config';
 import { map } from 'rxjs';
+import { configStt } from '../config/config.stt';
 
 @Injectable()
 export class TokensService {
-  constructor(
-    private readonly http: HttpService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private readonly http: HttpService) {}
 
   async tokenGenerate() {
-    const clientId = this.configService.get('VITO_CLIENT_ID');
-    const clientSecret = this.configService.get('VITO_CLIENT_SECRET');
+    const clientId = configStt.SECRET_ID;
+    const clientSecret = configStt.SECRET_PASS;
 
     return this.http
       .post('https://openapi.vito.ai/v1/authenticate', {
