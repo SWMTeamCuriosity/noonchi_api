@@ -1,0 +1,16 @@
+FROM node:18.10.0-alpine3.15
+MAINTAINER timbergrizz <jwk19990907@gmail.com>
+
+RUN apk update
+RUN apk add git
+RUN git clone https://github.com/SWMTeamCuriosity/noonchi_api.git
+
+WORKDIR noonchi_api
+RUN git checkout develop
+RUN npm install
+
+RUN mkdir /noonchi_api/src/config
+COPY ./config /noonchi_api/src/config
+
+CMD ["npm", "run", "start"]
+EXPOSE 3080
