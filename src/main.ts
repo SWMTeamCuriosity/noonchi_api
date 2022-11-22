@@ -6,7 +6,7 @@ import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const port = 3000 || process.env.PORT;
+  const port = 3000;
 
   app.useLogger(app.get(Logger));
 
@@ -22,6 +22,8 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
+
+  console.log(port);
 
   await app.listen(port);
 }

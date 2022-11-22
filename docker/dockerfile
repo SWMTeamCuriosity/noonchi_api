@@ -13,4 +13,4 @@ RUN mkdir /noonchi_api/src/config
 COPY ./config /noonchi_api/src/config
 
 CMD ["npm", "run", "start"]
-EXPOSE 3080
+EXPOSE 3000
