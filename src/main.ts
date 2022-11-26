@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = 3000;
 
+  app.enableCors();
   app.useLogger(app.get(Logger));
 
   const config = new DocumentBuilder()
